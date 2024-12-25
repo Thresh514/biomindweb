@@ -1,5 +1,6 @@
 # biomindweb
-</h1> Welcome to Biomind Logic Project!</h1>
+Welcome to Biomind Logic Project!
+
 =======
 # Getting Started with Create React App
 
