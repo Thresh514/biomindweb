@@ -1,4 +1,4 @@
-# biomindweb
+# BiomindWeb
 Welcome to Biomind Logic Project!
 
 =======
