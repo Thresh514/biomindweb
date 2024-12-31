@@ -1,1 +1,1 @@
-Biomind Logic Project
+Biomindlogic website project
