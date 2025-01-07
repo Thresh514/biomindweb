@@ -1,4 +1,5 @@
 {
+<<<<<<< HEAD
   "dependencies": {
     "next": "^15.1.3",
     "react": "^19.0.0",
@@ -13,3 +14,9 @@
 }
 
 
+=======
+  "devDependencies": {
+    "tailwindcss": "^3.4.17"
+  }
+}
+>>>>>>> 6acba7a644b5773a8447907ca38415809570a284
