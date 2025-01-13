@@ -1,0 +1,12 @@
+/* src/styles/globals.css */
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+body {
+    font-family: 'Roboto', sans-serif;
+}
+nav {
+    background-color: #aeb1b8;
+    color: white;
+}
