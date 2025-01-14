@@ -35,6 +35,8 @@ export default function FeaturedResources() {
     const [imageIndexes, setImageIndexes] = useState(
         resources.map(() => 0) // 初始化每个资源的图片索引
     );
+    const [hoveredIndex, setHoveredIndex] = useState(null); // 当前 hover 的资源索引
+    const [hoverTimeout, setHoverTimeout] = useState(null); // 记录 hover 的计时器
 
     // 自动滚动功能
     useEffect(() => {
@@ -57,25 +59,33 @@ export default function FeaturedResources() {
     };
 
     // 切换到下一个图片
-    const handleImageNext = () => {
+    const handleImageNext = (resourceIndex) => {
         setImageIndexes((prevIndexes) =>
             prevIndexes.map((index, i) =>
-                i === currentIndex ? (index + 1) % resources[currentIndex].imageUrl.length : index
+                i === resourceIndex
+                    ? (index + 1) % resources[resourceIndex].imageUrl.length
+                    : index
             )
         );
     };
 
-    // 切换到上一个图片
-    const handleImagePrev = () => {
-        setImageIndexes((prevIndexes) =>
-            prevIndexes.map((index, i) =>
-                i === currentIndex
-                    ? index === 0
-                        ? resources[currentIndex].imageUrl.length - 1
-                        : index - 1
-                    : index
-            )
-        );
+    // 鼠标进入时，切换图片
+    const handleMouseEnter = (resourceIndex) => {
+        setHoveredIndex(resourceIndex);
+        const timeout = setInterval(() => {
+            handleImageNext(resourceIndex); // 切换到下一张图片
+        }, 2000); // 停留 3 秒后切换
+        setHoverTimeout(timeout);
+    };
+
+    
+    // 当鼠标离开时，清除计时器
+    const handleMouseLeave = () => {
+        setHoveredIndex(null);
+        if (hoverTimeout) {
+            clearInterval(hoverTimeout);
+            setHoverTimeout(null);
+        }
     };
 
     return (
@@ -93,44 +103,35 @@ export default function FeaturedResources() {
                             key={resource.id}
                             className="min-w-full p-4 flex-shrink bg-white rounded-lg flex items-center"
                         >
-                            <div className="relative flex justify-center items-center overflow-x-auto space-x-4 w-1/2 bg-white">
-
-                            {/* 图片左边滚动按钮 */}
-                                <button
-                                    onClick={() => handleImagePrev(resourceIndex)}
-                                    className="absolute top-1/2 left-0 text-m transform -translate-y-1/2 bg-transparent p-2 h-full w-[30px] z-10 opacity-40 hover:opacity-90 transition-opacity duration-300"
-                                >
-                                    ◀
-                                </button>
                             {/* 图片 */}
                             <div
-                                className="flex transition-transform duration-1000"
-                                style={{
-                                    transform: `translateX(-${imageIndexes[resourceIndex] * 100}%)`,
-                                }}
+                                className="flex items-center relative w-1/2 h-[900px] overflow-hidden"
+                                onMouseEnter={() => handleMouseEnter(resourceIndex)}
+                                onMouseLeave={handleMouseLeave}
                             >
-                                {Array.isArray(resource.imageUrl) &&
-                                    resource.imageUrl.map((image, index) => (
-                                        <div
-                                            key={index}
-                                            className= 'flex-shrink-1 w-full h-full'
-                                        >
-                                            <img
-                                                src={image}
-                                                alt={resource.title}
-                                                style={{width: '100%', height: 'auto', objectFit: 'contain'}}
-                                                className="rounded-lg object-contain"
-                                            />
-                                        </div>
-                                    ))}
-                            </div>
-                            {/* 图片右边滚动按钮 */}
-                                <button
-                                    onClick={() => handleImageNext(resourceIndex)}
-                                    className="absolute top-1/2 right-0 text-m transform -translate-y-1/2 bg-transparent p-4 h-full w-[30px] z-10 opacity-40 hover:opacity-90 transition-opacity duration-300"
+                                <div
+                                    className="flex transition-transform duration-700"
+                                    style={{
+                                        transform: `translateX(-${
+                                            imageIndexes[resourceIndex] * 100
+                                        }%)`,
+                                    }}
                                 >
-                                    ▶
-                                </button>
+                                    {resource.imageUrl.map((image, index) => (
+                                        <img
+                                            key={index}
+                                            src={image}
+                                            alt={`Resource ${resourceIndex + 1} Image ${
+                                                index + 1
+                                            }`}
+                                            className={`w-full h-full object-contain rounded-lg transition-transform duration-400 ${
+                                                hoveredIndex === resourceIndex
+                                                    ? 'scale-110'
+                                                    : 'scale-100'
+                                            }`}
+                                        />
+                                    ))}
+                                </div>
                             </div>
 
                             <div className="flex-1 ml-6 mr-6">
@@ -144,7 +145,7 @@ export default function FeaturedResources() {
                                 </div>
                                 <a
                                     href={resource.link}
-                                    className="block bg-lighter text-white text-center py-2 mt-4 mb-4 rounded hover:bg-middle"
+                                    className="block bg-lighter text-white text-center font-semibold py-2 mt-4 mb-4 rounded hover:bg-middle"
                                 >
                                     View Resource
                                 </a>

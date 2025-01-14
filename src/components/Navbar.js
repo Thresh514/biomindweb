@@ -111,14 +111,14 @@ export default function Navbar(){
             </div>
 
             <div>
-            <a href="#login" className="p-2 ml-16 mr-2 font-semibold text-lg hover:underline">
+            <a href="#login" className="relative left-60 p-4 font-semibold text-lg hover:underline">
                 Login
             </a>
             </div>
 
             <div>
-            <a href="#join" className="p-5 mr-4 font-semibold bg-darker rounded-lg text-white text-lg hover:underline">
-                Join
+            <a href="#join" className="p-5 relative left-64 font-semibold bg-darker rounded-lg text-white text-lg hover:underline">
+                Join Membership !
             </a>
             </div>
 
