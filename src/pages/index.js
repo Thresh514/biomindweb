@@ -1,8 +1,10 @@
 import { useState } from 'react';
 import Head from 'next/head';
-import Link from 'next/link';
+import Header from '../components/Header';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
+import ResourceCard from '../components/ResourceCard';
+
 
 export default function Home() {
 
@@ -12,10 +14,10 @@ export default function Home() {
         <title>Biomind Homepage</title>
         <meta name="description" content="A platform for educational resources." />
       </Head>
+      <Header/>
       <Navbar/>
       <main className="pt-32">
-        <h2 className="text-3xl text-darker font-semibold text-center mt-4 mb-4">Feature Resource</h2>
-        <p className="text-center">This block is under construction</p>
+        <ResourceCard/>
       </main>
 
       <Footer/>
