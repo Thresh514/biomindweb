@@ -1,9 +1,9 @@
 import Link from 'next/link';
-import { useState } from 'react';
+import { useState, useEffect } from 'react'; 
 
 export default function Navbar(){
     const [isVisible, setIsVisible] = useState(false); // 新增状态控制菜单显示隐藏
-    
+   
     const menuItems = {
         "GCSE / IGCSE": {
             Biology: ["Biology Papers", "Biology Revision"],
@@ -110,11 +110,16 @@ export default function Navbar(){
             </Link>
             </div>
 
+            {/* Login / Logout */}
+            {/* 登录按钮只在用户未登录时显示 */}
+            
             <div>
-            <a href="#login" className="relative left-60 p-4 font-semibold text-lg hover:underline">
+                <Link href="/login" className="relative left-60 p-4 font-semibold text-lg hover:underline">
                 Login
-            </a>
+                </Link>
             </div>
+            
+
 
             <div>
             <a href="#join" className="p-5 relative left-64 font-semibold bg-darker rounded-lg text-white text-lg hover:underline">
