@@ -1,8 +1,31 @@
 import Link from 'next/link';
 import { useState, useEffect } from 'react'; 
+import { useRouter } from 'next/router';
 
 export default function Navbar(){
     const [isVisible, setIsVisible] = useState(false); // 新增状态控制菜单显示隐藏
+    const [isLoggedIn, setIsLoggedIn] = useState(false); 
+    const router = useRouter();
+
+     // 从 localStorage 获取登录状态
+     useEffect(() => {
+        const userLoggedIn = localStorage.getItem("userLoggedIn");
+        if (userLoggedIn) {
+            setIsLoggedIn(true);
+        }
+    }, []);
+
+    // 处理登录（跳转到登录页面）
+    const handleLogin = () => {
+        router.push('/login');  // 跳转到登录页面
+    };
+
+    // 处理登出（跳转到主页）
+    const handleLogout = () => {
+        setIsLoggedIn(false);  // 更新状态
+        localStorage.removeItem("userLoggedIn");  // 清除登录状态
+        router.push('/');  // 跳转回主页
+    }  
    
     const menuItems = {
         "GCSE / IGCSE": {
@@ -109,22 +132,26 @@ export default function Navbar(){
                 About Us
             </Link>
             </div>
-
-            {/* Login / Logout */}
-            {/* 登录按钮只在用户未登录时显示 */}
             
-            <div>
-                <Link href="/login" className="relative left-60 p-4 font-semibold text-lg hover:underline">
-                Login
-                </Link>
-            </div>
-            
+            <div className="absolute top-0 right-10 flex items-center space-x-4">
+                {/* 根据登录状态显示 Login 或 Logout */}
+                <div>
+                    <button 
+                        onClick={isLoggedIn ? handleLogout : handleLogin} 
+                        className="p-4 font-semibold bg-darker rounded-lg text-white text-lg hover:underline"
+                    >
+                        {isLoggedIn ? 'Logout' : 'Login'}
+                    </button>
+                </div>
 
-
-            <div>
-            <a href="#join" className="p-5 relative left-64 font-semibold bg-darker rounded-lg text-white text-lg hover:underline">
-                Join Membership !
-            </a>
+                <div>
+                    <a 
+                        href="#join" 
+                        className="p-5 font-semibold bg-darker rounded-lg text-white text-lg hover:underline"
+                    >
+                        Join Membership !
+                    </a>
+                </div>
             </div>
 
         </div>

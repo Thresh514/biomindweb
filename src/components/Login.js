@@ -19,6 +19,7 @@ const Login = () => {
 
         if (response.ok) {
             // 登录成功，跳转到主页
+            localStorage.setItem("userLoggedIn", true);
             router.push("/");
         } else {
             // 登录失败，显示错误信息
