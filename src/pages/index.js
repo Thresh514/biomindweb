@@ -1,8 +1,13 @@
-import { useState } from 'react';
 import Head from 'next/head';
-import Link from 'next/link';
+import Header from '../components/Header';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
+import HeroSection from '../components/index/Herosection';
+import ResourceCard from '../components/index/ResourceCard';
+import MembershipBenefits from '../components/index/MembershipBenefits';
+import SuccessStories from '../components/index/SuccessStories';
+import MembershipPlans from '../components/index/MembershipPlans';
+import ResourceCategories from '../components/index/ResourceCategories';
 
 export default function Home() {
 
@@ -12,10 +17,15 @@ export default function Home() {
         <title>Biomind Homepage</title>
         <meta name="description" content="A platform for educational resources." />
       </Head>
+      <Header/>
       <Navbar/>
-      <main className="pt-32">
-        <h2 className="text-3xl text-darker font-semibold text-center mt-4 mb-4">Feature Resource</h2>
-        <p className="text-center">This block is under construction</p>
+      <main className="pt-16 flex flex-col items-center justify-center space-y-8">
+        <HeroSection/>
+        <ResourceCard />
+        <MembershipBenefits/>
+        <SuccessStories/>
+        <MembershipPlans/>
+        <ResourceCategories/>
       </main>
 
       <Footer/>
