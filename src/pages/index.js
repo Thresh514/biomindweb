@@ -2,11 +2,12 @@ import Head from 'next/head';
 import Header from '../components/Header';
 import Navbar from '../components/Navbar';
 import Footer from '../components/Footer';
-import HeroSection from '../components/Herosection';
-import ResourceCard from '../components/ResourceCard';
-import MembershipBenefits from '../components/MembershipBenefits';
-import SuccessStories from '../components/SuccessStories';
-
+import HeroSection from '../components/index/Herosection';
+import ResourceCard from '../components/index/ResourceCard';
+import MembershipBenefits from '../components/index/MembershipBenefits';
+import SuccessStories from '../components/index/SuccessStories';
+import MembershipPlans from '../components/index/MembershipPlans';
+import ResourceCategories from '../components/index/ResourceCategories';
 
 export default function Home() {
 
@@ -18,14 +19,13 @@ export default function Home() {
       </Head>
       <Header/>
       <Navbar/>
-      <main className="pt-16 flex flex-col items-center justify-center">
+      <main className="pt-16 flex flex-col items-center justify-center space-y-8">
         <HeroSection/>
         <ResourceCard />
-        <div className="mt-32 mb-32">
-          <MembershipBenefits/>
-          <SuccessStories/>
-        </div>
-
+        <MembershipBenefits/>
+        <SuccessStories/>
+        <MembershipPlans/>
+        <ResourceCategories/>
       </main>
 
       <Footer/>
