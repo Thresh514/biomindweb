@@ -11,7 +11,7 @@ export default function HeroSection() {
     return (
         <section className="relative bg-white text-darker h-screen">
         {/* 背景视频 */}
-        <div className="absolute top-0 left-0 w-full h-full z-0">
+        {/* <div className="absolute top-0 left-0 w-full h-full z-0">
         {isClient && (
             <ReactPlayer
                 url="/background-video.mp4" // replace with your video path or URL
@@ -23,7 +23,7 @@ export default function HeroSection() {
                 className="object-cover"
             />
         )}
-        </div>
+        </div> */}
 
         {/* 内容 */}
         <div className="relative z-10 flex flex-col items-center justify-center h-full text-center px-4">

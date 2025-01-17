@@ -1,64 +1,33 @@
 import React, { useState, useEffect } from 'react';
 
-const resources = [
-    {
-        id: 1,
-        title: 'A-Level & AS Biology Chapter 1 Mindmap',
-        description: 'A mindmap covering the first chapter of AS Biology.',
-        category: 'Biology',
-        uploadDate: '2025-01-10',
-        link: '#a-level-as-biology-chapter-1-mindmap',
-        imageUrl: ['/asch1mindmap.jpg'],
-    },
-    {
-        id: 2,
-        title: 'A-Level A2 Biology Syllabus Analysis',
-        description: 'A detailed analysis of the A2 Biology syllabus.',
-        category: 'Biology',
-        uploadDate: '2025-01-08',
-        link: '#a-level-a2-biology-syllabus-analysis',
-        imageUrl: ['/a2syllabus1.jpg', '/a2syllabus2.jpg','/a2syllabus3.jpg'],
-    },
-    {
-        id: 3,
-        title: 'GCSE Physics Formula Sheet',
-        description: 'A handy formula sheet for GCSE Physics students.',
-        category: 'Physics',
-        uploadDate: '2025-01-12',
-        link: '#gcse-physics-formula-sheet',
-        imageUrl: ['/physics1.jpg', '/physics2.jpg'],
-    },
-];
-
 export default function FeaturedResources() {
-    const [currentIndex, setCurrentIndex] = useState(0);
-    const [imageIndexes, setImageIndexes] = useState(
-        resources.map(() => 0) // 初始化每个资源的图片索引
-    );
+    const [resources, setResources] = useState([]); // 存储资源数据
+    const [imageIndexes, setImageIndexes] = useState([]); // 图片索引
+    const [currentIndex, setCurrentIndex] = useState(0); // 当前卡片索引
     const [hoveredIndex, setHoveredIndex] = useState(null); // 当前 hover 的资源索引
-    const [hoverTimeout, setHoverTimeout] = useState(null); // 记录 hover 的计时器
+    const [hoverTimeout, setHoverTimeout] = useState(null); // hover 切换计时器
 
-    // 自动滚动功能
+    // 从 API 加载资源数据
+    useEffect(() => {
+        console.log('Fetching resources...');
+        fetch('http://localhost:3003/api/resources')
+            .then((response) => response.json())
+            .then((data) => {
+                setResources(data);
+                setImageIndexes(data.map(() => 0)); // 初始化每个资源的图片索引
+            })
+            .catch((error) => console.error('Error fetching resources:', error));
+    }, []);
+
+    // 自动切换卡片功能
     useEffect(() => {
         const interval = setInterval(() => {
             setCurrentIndex((prevIndex) => (prevIndex + 1) % resources.length);
-        }, 30000); // 每30秒切换
+        }, 30000); // 每 30 秒切换
         return () => clearInterval(interval);
-    }, []);
+    }, [resources.length]);
 
-    // 切换到下一个卡片
-    const handleNext = () => {
-        setCurrentIndex((prevIndex) => (prevIndex + 1) % resources.length);
-    };
-
-    // 切换到上一个卡片
-    const handlePrev = () => {
-        setCurrentIndex((prevIndex) =>
-            prevIndex === 0 ? resources.length - 1 : prevIndex - 1
-        );
-    };
-
-    // 切换到下一个图片
+    // 切换到下一张图片
     const handleImageNext = (resourceIndex) => {
         setImageIndexes((prevIndexes) =>
             prevIndexes.map((index, i) =>
@@ -69,17 +38,16 @@ export default function FeaturedResources() {
         );
     };
 
-    // 鼠标进入时，切换图片
+    // 鼠标进入时触发图片切换
     const handleMouseEnter = (resourceIndex) => {
         setHoveredIndex(resourceIndex);
         const timeout = setInterval(() => {
             handleImageNext(resourceIndex); // 切换到下一张图片
-        }, 2000); // 停留 3 秒后切换
+        }, 2000); // 每 2 秒切换
         setHoverTimeout(timeout);
     };
 
-    
-    // 当鼠标离开时，清除计时器
+    // 鼠标移出时清除计时器
     const handleMouseLeave = () => {
         setHoveredIndex(null);
         if (hoverTimeout) {
@@ -88,10 +56,27 @@ export default function FeaturedResources() {
         }
     };
 
+    // 切换到下一张卡片
+    const handleNext = () => {
+        setCurrentIndex((prevIndex) => (prevIndex + 1) % resources.length);
+    };
+
+    // 切换到上一张卡片
+    const handlePrev = () => {
+        setCurrentIndex((prevIndex) =>
+            prevIndex === 0 ? resources.length - 1 : prevIndex - 1
+        );
+    };
+
+    // 如果资源尚未加载完成，显示 Loading...
+    if (resources.length === 0) {
+        return <div>Loading...</div>;
+    }
+
     return (
         <div className="relative bg-white p-10 border rounded-lg shadow-lg w-4/5 mx-auto mt-10 mb-10 h-[600px]">
             <div className="overflow-hidden flex items-center justify-center h-full relative">
-                {/* 滚动卡片 */}
+                {/* 卡片容器 */}
                 <div
                     className="flex transition-transform duration-1000"
                     style={{
@@ -103,7 +88,7 @@ export default function FeaturedResources() {
                             key={resource.id}
                             className="min-w-full p-4 flex-shrink bg-white rounded-lg flex items-center"
                         >
-                            {/* 图片 */}
+                            {/* 图片部分 */}
                             <div
                                 className="flex items-center relative w-1/2 h-[900px] overflow-hidden"
                                 onMouseEnter={() => handleMouseEnter(resourceIndex)}
@@ -134,6 +119,7 @@ export default function FeaturedResources() {
                                 </div>
                             </div>
 
+                            {/* 文本内容 */}
                             <div className="flex-1 ml-6 mr-6">
                                 <h3 className="text-xl font-semibold mb-4">{resource.title}</h3>
                                 <p className="text-gray-600 text-m mb-4 mt-4">{resource.description}</p>
