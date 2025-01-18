@@ -1,10 +1,20 @@
+import Head from "next/head";
 import Login from "../components/Login";
+import SimpleHeader from "../components/SimpleHeader";
+import Footer from "../components/Footer";
 
 const LoginPage = () => {
     return (
         <div>
-            <h1 className="text-center text-3xl font-bold mt-10">Welcome to Login Page</h1>
-            <Login />
+            <Head>
+                <title>Login Page</title>
+                <meta name="description" content="Login page." />
+            </Head>
+            <SimpleHeader />
+            <main className="bg-lightest">
+                <Login />
+                <Footer />
+            </main>
         </div>
     );
 };
