@@ -8,7 +8,7 @@ export default function Navbar(){
     const router = useRouter();
 
      // 从 localStorage 获取登录状态
-     useEffect(() => {
+    useEffect(() => {
         const userLoggedIn = localStorage.getItem("userLoggedIn");
         if (userLoggedIn) {
             setIsLoggedIn(true);
@@ -26,7 +26,7 @@ export default function Navbar(){
         localStorage.removeItem("userLoggedIn");  // 清除登录状态
         router.push('/');  // 跳转回主页
     }  
-   
+
     const menuItems = {
         "GCSE / IGCSE": {
             Biology: ["Biology Papers", "Biology Revision"],
