@@ -89,7 +89,7 @@ export default function FeaturedResources() {
     };
 
     return (
-        <div className="relative bg-white p-10 border rounded-lg shadow-lg w-4/5 mx-auto mt-10 mb-10 h-[600px]">
+        <section className="relative bg-white p-10 border rounded-lg shadow-lg w-4/5 mx-auto mt-10 mb-10 h-[600px]">
             <div className="overflow-hidden flex items-center justify-center h-full relative">
                 {/* 滚动卡片 */}
                 <div
@@ -180,6 +180,6 @@ export default function FeaturedResources() {
                     ></div>
                 ))}
             </div>
-        </div>
+        </section>
     );
 }

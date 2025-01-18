@@ -20,12 +20,12 @@ export default function Home() {
       <Header/>
       <Navbar/>
       <main className="pt-16 flex flex-col items-center justify-center space-y-8">
-        <HeroSection/>
-        <ResourceCard />
-        <MembershipBenefits/>
-        <SuccessStories/>
-        <MembershipPlans/>
-        <ResourceCategories/>
+        <div data-aos="fade-up"><HeroSection /></div>
+        <div data-aos="fade-up"><ResourceCard /></div>
+        <div data-aos="fade-up"><MembershipBenefits/></div>
+        <div data-aos="fade-up"><SuccessStories/></div>
+        <div data-aos="fade-up"><MembershipPlans/></div>
+        <div data-aos="fade-up"><ResourceCategories/></div>
       </main>
 
       <Footer/>
