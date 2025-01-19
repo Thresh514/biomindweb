@@ -28,20 +28,9 @@ export default function Navbar(){
     }  
 
     const menuItems = {
-        "GCSE / IGCSE": {
-            Biology: ["Biology Papers", "Biology Revision"],
-            Chemistry: ["Chemistry Papers", "Chemistry Revision"],
-            Physics: ["Physics Papers", "Physics Revision"],
-            Maths: ["Maths Papers", "Maths Revision"]
-        },
-        "A-Level": {
-            Biology: ["Biology Papers", "Biology Revision"],
-            Chemistry: ["Chemistry Papers", "Chemistry Revision"],
-            Physics: ["Physics Papers", "Physics Revision"],
-            Maths: ["Maths Papers", "Maths Revision"],
-            "Computer Science": ["Computer Science Papers", "Computer Science Revision"]
-        },
-    };
+        "GCSE / IGCSE": ["Biology", "Chemistry", "Physics", "Maths"],
+        "A-Level": ["Biology", "Chemistry", "Physics", "Maths", "Computer Science"],
+};
 
     const handleMouseEnter = () => {
         setIsVisible(true);
@@ -52,7 +41,7 @@ export default function Navbar(){
     };
     
     return (
-    <nav className="flex bg-gradient-to-b from-lightest to-white text-darkest space-x-16 p-6 justify-evenly fixed top-20 left-0 right-0 z-50">
+    <nav className="flex bg-gradient-to-b from-lightest to-white text-darkest space-x-16 p-6 justify-evenly">
         <div className="flex flex-row items-center">
             <div>
             <Link href="/" className="p-4 ml-4 mr-4 font-semibold text-lg hover:underline">
@@ -66,13 +55,13 @@ export default function Navbar(){
                     onMouseEnter={handleMouseEnter}
                     onMouseLeave={handleMouseLeave}
                 >
-                    <span className="cursor-pointer font-semibold text-lg hover:underline">
+                    <Link href="/categories" className="font-semibold text-lg hover:underline">
                         Resource Categories
-                    </span>
+                    </Link>
                     {/* 下拉菜单 */}
                     {isVisible && (
                     <div 
-                        className={`absolute text-black bg-white shadow-lg rounded-lg p-4 w-[450px] transition-all duration-300 ease-out ${
+                        className={`absolute text-black bg-white shadow-lg rounded-lg p-4 w-[300px] transition-all duration-300 ease-out ${
                             isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-4"
                         }`}
                     >
@@ -81,16 +70,12 @@ export default function Navbar(){
                                 <div className="p-3">
                                     <a href="#igcse" className="font-bold text-xl cursor-pointer hover:underline">IGCSE</a>
                                     <div className="">
-                                        {Object.keys(menuItems["GCSE / IGCSE"]).map((subject) => (
-                                            <div key={subject} className="mt-2 mb-2">
-                                                <div className="font-semibold">{subject}</div>
-                                                {menuItems["GCSE / IGCSE"][subject].map((item, idx) => (
+                                                {menuItems["GCSE / IGCSE"].map((subject, idx) => (
                                                     <div key={idx} className="mt-2 mb-2">
-                                                        <a href={`#${item.replace(/\s+/g, '-').toLowerCase()}`} className="hover:underline">{item}</a>
+                                                        <a href={`#${subject.replace(/\s+/g, '-').toLowerCase()}`} className="hover:underline">{subject}</a>
                                                     </div>
                                                 ))}
-                                            </div>
-                                        ))}
+                                        
                                     </div>
                                 </div>
 
@@ -98,20 +83,15 @@ export default function Navbar(){
                                 <div className="p-3">
                                     <a href="#alevel" className="font-bold text-xl cursor-pointer hover:underline">A-Level</a>
                                     <div className="">
-                                        {Object.keys(menuItems["A-Level"]).map((subject) => (
-                                            <div key={subject} className="mt-2 mb-2"> 
-                                                <div className="font-semibold">{subject}</div>
-                                                {menuItems["A-Level"][subject].map((item, idx) => (
+                                                {menuItems["A-Level"].map((subject, idx) => (
                                                     <div key={idx} className="mt-2 mb-2">
-                                                        <a href={`#${item.replace(/\s+/g, '-').toLowerCase()}`} className="hover:underline">{item}</a>
+                                                        <a href={`#${subject.replace(/\s+/g, '-').toLowerCase()}`} className="hover:underline">{subject}</a>
                                                     </div>
                                                 ))}
                                             </div>
-                                        ))}
                                     </div>
                                 </div>
                             </div>
-                        </div>
                     )}
                 </div>
 
