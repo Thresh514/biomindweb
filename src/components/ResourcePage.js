@@ -1,4 +1,7 @@
 import React, { useState } from 'react';
+import subject from "../lib/SubjectData.json";
+import subjectChapters from '../lib/subjectsChapters.json';
+
 
 // 左侧导航栏组件
 const Sidebar = ({ categories, onSelectSubject }) => {
@@ -12,7 +15,7 @@ const Sidebar = ({ categories, onSelectSubject }) => {
 
     return (
         <div className="max-w-7xl mx-auto md:w-1/3 pl-48 text-darker p-4">
-            {categories.map((category) => (
+            {subject.map((category) => (
                 <div key={category.name}>
                     <div
                         className="cursor-pointer text-darker font-semibold text-xl py-2"
@@ -54,59 +57,14 @@ const Sidebar = ({ categories, onSelectSubject }) => {
 };
 
 // 右侧章节资源展示组件
-const ChapterList = ({ selectedSubject }) => {
-    if (!selectedSubject) {
-        return <div className="max-w-7xl mx-auto md:w-2/3 pr-48 flex items-center justify-center text-xl text-darker text-semibold p-4">Please select a subject to view the chapters.</div>; //注意：右侧样式调整
-    }
-
-    // 每个学科对应的章节数据
-    const subjectChapters = {
-        'A-Level AS Mathematics': [
-            {
-                name: 'Chapter 1: Algebra',
-                analysisLink: '/analysis/algebra',
-                mindmapLink: '/mindmap/algebra',
-                videoLink: '/video/algebra',
-            },
-            {
-                name: 'Chapter 2: Calculus',
-                analysisLink: '/analysis/calculus',
-                mindmapLink: '/mindmap/calculus',
-                videoLink: '/video/calculus',
-            },
-        ],
-
-        'IGCSE Mathematics': [
-            {
-                name: 'Chapter 1: Linear Equations',
-                analysisLink: '/analysis/linear-equations',
-                mindmapLink: '/mindmap/linear-equations',
-                videoLink: '/video/linear-equations',
-            },
-            {
-                name: 'Chapter 2: Geometry',
-                analysisLink: '/analysis/geometry',
-                mindmapLink: '/mindmap/geometry',
-                videoLink: '/video/geometry',
-            },
-        ],
-
-        'IGCSE Physics': [
-            {
-                name: 'Chapter 1: Mechanics',
-                analysisLink: '/analysis/mechanics',
-                mindmapLink: '/mindmap/mechanics',
-                videoLink: '/video/mechanics',
-            },
-            {
-                name: 'Chapter 2: Thermodynamics',
-                analysisLink: '/analysis/thermodynamics',
-                mindmapLink: '/mindmap/thermodynamics',
-                videoLink: '/video/thermodynamics',
-            },
-        ],
-        // 添加其他学科的章节...
-    };
+    const ChapterList = ({ selectedSubject }) => {
+        if (!selectedSubject) {
+            return (
+            <div className="max-w-7xl mx-auto md:w-2/3 pr-48 flex items-center justify-center text-xl text-darker text-semibold p-4">
+                Please select a subject to view the chapters.
+            </div> //注意：右侧样式调整
+            );
+        }
 
     const chapters = subjectChapters[selectedSubject] || [];
 
@@ -146,41 +104,19 @@ const ChapterList = ({ selectedSubject }) => {
 const ResourcePage = () => {
     const [selectedSubject, setSelectedSubject] = useState(null);
 
-    const categories = [
-        {
-            name: 'A-Level',
-            subcategories: [
-                {
-                    name: 'AS',
-                    subjects: ['Mathematics', 'Physics', 'Chemistry'],
-                },
-                {
-                    name: 'A2',
-                    subjects: ['Biology', 'Economics', 'Computer Science'],
-                },
-            ],
-        },
-        {
-            name: 'IGCSE',
-            subcategories: [
-                {
-                    subjects: ['English', 'Mathematics', 'Biology', 'Chemistry', 'Physics'],
-                },
-            ],
-        },
-    ];
+    const categories = Array.isArray(subject) ? subject : subject.categories || [];
 
-    const handleSelectSubject = (subject, categoryName) => {
+    const handleSelectSubject = (subjectName, categoryName) => {
         let selectedSubject = null;  // 存储 A-Level 和 IGCSE 的科目
         
         categories.forEach((category) => {
             if (category.name === categoryName) {
                 category.subcategories.forEach((subcategory) => {
-                    if (subcategory.subjects.includes(subject)) {
+                    if (subcategory.subjects.includes(subjectName)) {
                         if (category.name === 'A-Level') {
-                            selectedSubject = `A-Level ${subcategory.name} ${subject}`;
+                            selectedSubject = `A-Level ${subcategory.name} ${subjectName}`;
                         } else if (category.name === 'IGCSE') {
-                            selectedSubject = `IGCSE ${subject}`;
+                            selectedSubject = `IGCSE ${subjectName}`;
                         }
                     }
                 });

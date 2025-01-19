@@ -1,0 +1,46 @@
+{
+    "_comment": "目录页各个学科单元列表",
+    
+    "A-Level AS Mathematics": [
+        {
+        "name": "Chapter 1: Algebra",
+        "analysisLink": "/analysis/algebra",
+        "mindmapLink": "/mindmap/algebra",
+        "videoLink": "/video/algebra"
+        },
+        {
+        "name": "Chapter 2: Calculus",
+        "analysisLink": "/analysis/calculus",
+        "mindmapLink": "/mindmap/calculus",
+        "videoLink": "/video/calculus"
+        }
+    ],
+    "IGCSE Mathematics": [
+        {
+        "name": "Chapter 1: Linear Equations",
+        "analysisLink": "/analysis/linear-equations",
+        "mindmapLink": "/mindmap/linear-equations",
+        "videoLink": "/video/linear-equations"
+        },
+        {
+        "name": "Chapter 2: Geometry",
+        "analysisLink": "/analysis/geometry",
+        "mindmapLink": "/mindmap/geometry",
+        "videoLink": "/video/geometry"
+        }
+    ],
+    "IGCSE Physics": [
+        {
+        "name": "Chapter 1: Mechanics",
+        "analysisLink": "/analysis/mechanics",
+        "mindmapLink": "/mindmap/mechanics",
+        "videoLink": "/video/mechanics"
+        },
+        {
+        "name": "Chapter 2: Thermodynamics",
+        "analysisLink": "/analysis/thermodynamics",
+        "mindmapLink": "/mindmap/thermodynamics",
+        "videoLink": "/video/thermodynamics"
+        }
+    ]
+}

@@ -1,0 +1,27 @@
+
+[
+        {
+        "_comment": "目录页学科列表",
+        
+        "name": "A-Level",
+        "subcategories": [
+            {
+            "name": "AS",
+            "subjects": ["Mathematics", "Physics", "Chemistry"]
+            },
+            {
+            "name": "A2",
+            "subjects": ["Biology", "Economics", "Computer Science"]
+            }
+        ]
+        },
+        {
+        "name": "IGCSE",
+        "subcategories": [
+            {
+            "subjects": ["English", "Mathematics", "Biology", "Chemistry", "Physics"]
+            }
+        ]
+        }
+    ]
+
