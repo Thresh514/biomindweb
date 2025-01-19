@@ -2,7 +2,7 @@ import React from 'react';
 
 export default function Footer() {
     return (
-        <footer className="bg-lightest text-darker p-8">
+        <footer className="bg-lightest text-darker p-8 mt-12">
             <div className="max-w-7xl mx-auto px-6">
                 <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
                     {/* 快速导航 */}
@@ -28,7 +28,7 @@ export default function Footer() {
 
                     {/* 版权声明 */}
                     <div className='text-darkest'>
-                        <h3 className="text-xl font-semibold mb-4">Legal</h3>
+                        <h3 className="text-xl text-darker font-semibold mb-4">Legal</h3>
                         <p>© 2025 Biomind Logic. All rights reserved.</p>
                         <p className="mt-2">Disclaimer: The content on this platform is for educational purposes only and is not affiliated with any official exam boards.</p>
                     </div>
