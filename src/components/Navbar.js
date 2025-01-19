@@ -41,7 +41,7 @@ export default function Navbar(){
     };
     
     return (
-    <nav className="flex bg-gradient-to-b from-lightest to-white text-darkest space-x-16 p-6 justify-evenly">
+    <nav className="fixed top-20 left-0 right-0 z-50 flex bg-gradient-to-b from-lightest to-white text-darkest space-x-16 p-6 justify-evenly">
         <div className="flex flex-row items-center">
             <div>
             <Link href="/" className="p-4 ml-4 mr-4 font-semibold text-lg hover:underline">
@@ -102,9 +102,9 @@ export default function Navbar(){
             </div>
 
             <div>
-            <a href="#faq" className="p-4 ml-4 mr-4 font-semibold text-lg hover:underline">
+            <Link href="/faq" className="p-4 ml-4 mr-4 font-semibold text-lg hover:underline">
                 FAQ
-            </a>
+            </Link>
             </div>
 
             <div>

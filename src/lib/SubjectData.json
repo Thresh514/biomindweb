@@ -7,11 +7,11 @@
         "subcategories": [
             {
             "name": "AS",
-            "subjects": ["Mathematics", "Physics", "Chemistry"]
+            "subjects": ["Mathematics","Biology", "Physics", "Chemistry"]
             },
             {
             "name": "A2",
-            "subjects": ["Biology", "Economics", "Computer Science"]
+            "subjects": ["Mathematics", "Physics", "Biology", "Economics", "Computer Science"]
             }
         ]
         },

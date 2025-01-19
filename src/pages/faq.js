@@ -1,22 +1,22 @@
 import Head from 'next/head';
 import Header from '../components/Header';
 import Navbar from '../components/Navbar';
-import AboutPage from '../components/AboutPage';
+import FAQPage from '../components/FAQPage';
 import Footer from '../components/Footer';
 
-export default function About() {
+export default function Home() {
+
     return (
-    <div>
+        <div>
         <Head>
-            <title>About Page</title>
-            <meta name="description" content="about us" />
+            <title>FAQ Page</title>
+            <meta name="description" content="faq" />
         </Head>
         <Header/>
         <Navbar/>
         <main className="pt-32 min-h-screen">
-        <AboutPage/>
+            <FAQPage/>
         </main>
-        <Footer />
-    </div>
-    );
-}
+        <Footer/>
+        </div>
+        )}

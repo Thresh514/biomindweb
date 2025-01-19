@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import subject from "../lib/SubjectData.json";
 import subjectChapters from '../lib/subjectsChapters.json';
 
-
 // 左侧导航栏组件
 const Sidebar = ({ categories, onSelectSubject }) => {
     const [expandedCategory, setExpandedCategory] = useState(null);
@@ -39,7 +38,7 @@ const Sidebar = ({ categories, onSelectSubject }) => {
                                                 <div
                                                     key={subject}
                                                     className="cursor-pointer text-lg py-1"
-                                                    onClick={() => onSelectSubject(subject, category.name)}
+                                                    onClick={() => onSelectSubject(subject, category.name, sub.name || null)}
                                                 >
                                                     {subject}
                                                 </div>
@@ -106,24 +105,37 @@ const ResourcePage = () => {
 
     const categories = Array.isArray(subject) ? subject : subject.categories || [];
 
-    const handleSelectSubject = (subjectName, categoryName) => {
-        let selectedSubject = null;  // 存储 A-Level 和 IGCSE 的科目
-        
-        categories.forEach((category) => {
-            if (category.name === categoryName) {
-                category.subcategories.forEach((subcategory) => {
-                    if (subcategory.subjects.includes(subjectName)) {
-                        if (category.name === 'A-Level') {
-                            selectedSubject = `A-Level ${subcategory.name} ${subjectName}`;
-                        } else if (category.name === 'IGCSE') {
-                            selectedSubject = `IGCSE ${subjectName}`;
-                        }
-                    }
-                });
-            }
-        });
+    const handleSelectSubject = (subjectName, categoryName, subcategoryName) => {
+        let selectedSubject = null;
+    
+        // 找到对应的主分类
+        const category = categories.find((cat) => cat.name === categoryName);
+        if (!category) return;
 
-    setSelectedSubject(selectedSubject); // 设置选中的学科
+        const subcategory = category.subcategories.find(
+            (sub) => sub.name === subcategoryName && sub.subjects.includes(subjectName)
+        );
+
+        if (subcategoryName) {
+            // 处理有子分类名的情况
+            const subcategory = category.subcategories.find(
+                (sub) => sub.name === subcategoryName && sub.subjects.includes(subjectName)
+            );
+    
+            if (subcategory) {
+                selectedSubject = `${categoryName} ${subcategoryName} ${subjectName}`;
+            }
+        } else {
+            // 处理没有子分类名的情况（如 IGCSE）
+            const subcategory = category.subcategories.find((sub) =>
+                sub.subjects.includes(subjectName)
+            );
+    
+            if (subcategory) {
+                selectedSubject = `${categoryName} ${subjectName}`;
+            }
+        }
+        setSelectedSubject(selectedSubject); // 设置选中的学科
     };
 
     return (
