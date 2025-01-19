@@ -18,7 +18,7 @@ export default function Home() {
         <meta name="description" content="A platform for educational resources." />
       </Head>
       <Header/>
-      <Navbar/>
+      <div className='fixed top-20 left-0 right-0 z-50'><Navbar/></div>
       <main className="pt-16 flex flex-col items-center justify-center space-y-8">
         <div data-aos="fade-up"><HeroSection /></div>
         <div data-aos="fade-up"><ResourceCard /></div>

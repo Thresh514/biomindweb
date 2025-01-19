@@ -14,13 +14,14 @@ export default function HeroSection() {
         <div className="absolute top-0 left-0 w-full h-full z-0">
         {isClient && (
             <ReactPlayer
-                url="/background-video.mp4" // replace with your video path or URL
-                playing
-                loop
-                muted
+                url="/sample_video.mp4" // replace with your video path or URL
+                playing={true}
+                loop={true}
+                muted={true}
                 width="100%"
                 height="100%"
                 className="object-cover"
+                style={{ opacity: 0.2 }} 
             />
         )}
         </div>
