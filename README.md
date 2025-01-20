@@ -9,13 +9,9 @@ To start the development server:
    ```bash
    Local: http://localhost:3000
 
-
-
 # 数据库字段说明
 
 ## SubjectChapter.json
-
-### 每条记录的字段说明
 
 | 字段名          | 类型     | 描述                                               |
 |-----------------|----------|--------------------------------------------------|
@@ -25,7 +21,7 @@ To start the development server:
 | `category`     | `string` | 科目分类缩写，例如 `al` 表示 A-Level，`ig` 表示 IGCSE。 |
 | `level`        | `string` | 学科级别，例如 `as` 表示 AS Level，`a2` 表示 A2 Level。 |
 | `subject`      | `string` | 学科名，例如 `biology`。                            |
-| `unit`         | `string` | 单元编号，用于唯一标识每个章节。                    |
+| `unit`         | `string` | 单元编号，用于唯一标识每个章节。`ch1` 表示Chapter 1                   |
 | `analysisLink` | `string` | 分析资源的链接。                                   |
 | `mindmapLink`  | `string` | 思维导图资源的链接。                               |
 | `videoLink`    | `string` | 视频资源的链接。                                   |
@@ -54,3 +50,7 @@ To start the development server:
 |---------|----------|------------------------------------------|
 | `name`  | `string` | 学科名称，例如 `Biology`。                 |
 | `key`   | `string` | 唯一键，用于标识学科的键值，例如 `A-Level AS Biology`。 |
+
+## 数据转化说明
+
+在 `SubjectData.json` 中，每个学科对象的 `key` （例如 `A-Level AS Biology`）被用作 `SubjectChapter.json` 中的键。`SubjectChapter.json` 中存储了与该键相关的所有章节的详细信息。
