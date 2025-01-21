@@ -3,11 +3,11 @@ import { pool } from '../../lib/db'; // 引入数据库连接池
 
 export default async function handler(req, res) {
   if (req.method === 'POST') {
-    const { username, password } = req.body;
+    const { email, password } = req.body;
 
     // 查询数据库，查找用户
-    const query = 'SELECT * FROM users WHERE username = ?';
-    const values = [username];
+    const query = 'SELECT * FROM users WHERE email = ?';
+    const values = [email];
 
     try {
       const [rows] = await pool.query(query, values);
