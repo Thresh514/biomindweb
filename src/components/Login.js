@@ -6,6 +6,11 @@ const Login = () => {
     const [password, setPassword] = useState("");
     const router = useRouter();  // 使用 useRouter 创建 router 对象
 
+    // 跳转到忘记密码页面
+    const handleForgotPasswordClick = () => {
+        router.push("/forgot-password");
+    };
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         // 发送登录请求
@@ -25,6 +30,10 @@ const Login = () => {
             // 登录失败，显示错误信息
             alert("Login Failed");
         }
+    };
+
+    const handleSignupClick = () => {
+        router.push("/register");  // 假设 "/register" 是注册页面的路径
     };
 
     useEffect(() => {
@@ -95,9 +104,9 @@ const Login = () => {
                     </button>
                 </form>
                 <div className="mt-4 text-center">
-                    <a href="#" className="text-sm text-lighter font-semibold hover:underline">Forgot Password?</a>
+                    <a href="#" className="text-sm text-lighter font-semibold hover:underline" onClick={handleForgotPasswordClick}>Forgot Password?</a>
                     <p className="mt-2 text-sm text-gray-600">
-                    Need an account? <a href="#register" className="text-lighter font-semibold hover:underline">Sign Up</a>
+                    Need an account? <button onClick={handleSignupClick} className="text-lighter font-semibold hover:underline">Sign Up</button>
                     </p>
                     <p className="mt-2 text-xs text-gray-500">
                         By logging in, you agree with Biomind Logic's <a href="#" className="text-lighter font-semibold hover:underline">Service Terms</a> and <a href="#" className="text-lighter font-semibold hover:underline">Honor Code</a> and have read our <a href="#" className="text-lighter font-semibold hover:underline">Privacy Policy</a>.
