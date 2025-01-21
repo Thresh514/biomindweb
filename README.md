@@ -1,56 +1,113 @@
-# Welcome to the Biomindlogic Website Project
+# **Biomind Logic**
 
-To start the development server:
+Biomind Logicis an **educational resource integration platform** that provides students with access to organized academic materials such as mind maps, syllabus analysis, and more. This project combines a **Next.js** frontend with a **Flask** backend, using **MySQL** for data storage and management.
 
-1. Run the following command in your terminal:
-   ```bash
-   npm run dev
-2. After the server starts, press `Ctrl + Click` on the following link to open the webpage:
-   ```bash
-   Local: http://localhost:3000
-
-# 数据库字段说明
-
-## SubjectChapter.json
-
-| 字段名          | 类型     | 描述                                               |
-|-----------------|----------|--------------------------------------------------|
-| `name`         | `string` | 章节名称，例如 `Chapter 1: Cell Structure`。       |
-| `title`        | `string` | 章节标题，用于更简短的显示。                        |
-| `description`  | `string` | 章节描述，概述该章节的核心内容。                    |
-| `category`     | `string` | 科目分类缩写，例如 `al` 表示 A-Level，`ig` 表示 IGCSE。 |
-| `level`        | `string` | 学科级别，例如 `as` 表示 AS Level，`a2` 表示 A2 Level。 |
-| `subject`      | `string` | 学科名，例如 `biology`。                            |
-| `unit`         | `string` | 单元编号，用于唯一标识每个章节。`ch1` 表示Chapter 1                   |
-| `analysisLink` | `string` | 分析资源的链接。                                   |
-| `mindmapLink`  | `string` | 思维导图资源的链接。                               |
-| `videoLink`    | `string` | 视频资源的链接。                                   |
+## **Features**
+- **Responsive User Interface**: Built with Next.js and TailwindCSS for a seamless user experience across devices.  
+- **Resource Organization**: Resources are categorized by education level (e.g., A-Level, IGCSE) and subject for intuitive browsing.  
+- **Authentication System**: Includes login, registration, and password reset functionality using Flask APIs.  
+- **Dynamic Routing**: Implements resource navigation with dynamic paths (e.g., `/Resources/[category]/[level]/[subject]`).  
 
 ---
 
-## SubjectData.json
+## **Project Structure**
 
-### 主分类对象
+### **Frontend (Next.js)**
+Located in the **`src`** directory:
+- **`components`**: Reusable UI components, such as `Header`, `Navbar`, and `Footer`.  
+- **`pages`**:
+  - **API Routes**: Authentication logic in `api` folder (`login.js`, `register.js`, etc.).
+  - **Dynamic Pages**: Resource browsing implemented via nested routes (e.g., `Resources/[category]/[level]/[subject]`).
+  - **Static Pages**: Includes `about.js`, `categories.js`, etc., for general site information.
 
-| 字段名          | 类型     | 描述                           |
-|-----------------|----------|------------------------------|
-| `name`         | `string` | 主分类名称，例如 `A-Level`。    |
-| `subcategories`| `array`  | 包含该分类下的子分类数组。      |
+### **Backend (Flask)**
+- **`app.py`**: Entry point for the Flask server, handling API routes and database connections.
+- **`lib/db.js`**: Contains logic for database interactions using MySQL.
 
-### 子分类对象
+### **Configuration Files**
+- **`next.config.js`**: Next.js configuration for environment variables and build settings.
+- **`tailwind.config.js`**: TailwindCSS configuration for styling.
+- **`requirements.txt`**: Lists Python dependencies for Flask backend.
 
-| 字段名      | 类型     | 描述                         |
-|-------------|----------|----------------------------|
-| `name`      | `string` | 子分类名称，例如 `AS` 或 `A2`。 |
-| `subjects`  | `array`  | 包含该子分类下的学科信息数组。 |
+---
 
-### 学科对象
+## **Technologies Used**
 
-| 字段名  | 类型     | 描述                                       |
-|---------|----------|------------------------------------------|
-| `name`  | `string` | 学科名称，例如 `Biology`。                 |
-| `key`   | `string` | 唯一键，用于标识学科的键值，例如 `A-Level AS Biology`。 |
+### **Frontend**
+- **Next.js**: React framework for server-side rendering and static site generation.
+- **TailwindCSS**: Utility-first CSS framework for responsive styling.
 
-## 数据转化说明
+### **Backend**
+- **Flask**: Lightweight Python web framework for handling API requests.
+- **MySQL**: Relational database for managing user and resource data.
 
-在 `SubjectData.json` 中，每个学科对象的 `key` （例如 `A-Level AS Biology`）被用作 `SubjectChapter.json` 中的键。`SubjectChapter.json` 中存储了与该键相关的所有章节的详细信息。
+---
+
+## **Installation**
+
+### Prerequisites
+Ensure the following are installed on your system:
+- Node.js (v16 or higher)
+- Python (v3.8 or higher)
+- MySQL
+- npm or yarn
+- pip
+
+### Steps
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/Thresh514/biomindweb.git
+   cd biomindweb
+   ```
+
+2. Install backend dependencies:
+   ```bash
+   pip install -r requirements.txt
+   ```
+
+3. Install frontend dependencies:
+   ```bash
+   cd src
+   npm install
+   ```
+
+4. Set up the MySQL database:
+   - Create a new database:
+     ```sql
+     CREATE DATABASE biomindweb;
+     ```
+   - Update the Flask configuration in `app.py` with your database credentials:
+     ```python
+     app.config['SQLALCHEMY_DATABASE_URI'] = 'mysql+pymysql://username:password@localhost/biomindweb'
+     ```
+
+5. Start the Flask backend:
+   ```bash
+   python app.py
+   ```
+
+6. Start the Next.js frontend:
+   ```bash
+   cd src
+   npm run dev
+   ```
+
+7. Access the application at:
+   ```
+   http://localhost:3000
+   ```
+
+---
+
+## **Future Enhancements**
+- Add user roles (e.g., student, administrator) for resource management.
+- Enable video streaming for classroom recordings.
+- Implement search and recommendation systems for resources.
+- Enhance backend with caching for improved performance.
+
+---
+
+## **Contact**
+Created by **Jiayong Tu**  
+Email: [tonytudaodao@gmail.com](mailto:tonytudaodao@gmail.com)  
+GitHub: [Thresh514](https://github.com/Thresh514)
