@@ -4,7 +4,7 @@
     "bcrypt": "^5.1.1",
     "bcryptjs": "^2.4.3",
     "mysql2": "^3.12.0",
-    "next": "^15.1.3",
+    "next": "^15.2.3",
     "nodemailer": "^6.9.16",
     "object-assign": "^4.1.1",
     "react": "^19.0.0",
